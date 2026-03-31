@@ -112,6 +112,10 @@ function App() {
                 </div>
             )}
 
+            <footer>
+                <div className="text-center font-semibold py-4 mx-auto text-emerald-950 text-xl">© Sergii Ignatov, 2026</div>
+            </footer>
+
         </div>
     );
 }
