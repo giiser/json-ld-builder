@@ -1,5 +1,6 @@
 // src/SchemaNode.jsx
 import React from 'react';
+import Select from 'react-select'; // <-- 1. Import Select here
 import schemaData from './processed-schema.json';
 import { getEffectiveProperties, isSimpleField } from './schemaUtils';
 
@@ -10,7 +11,7 @@ export const SchemaNode = ({ typeId, value = {}, onChange, level = 0 }) => {
     if (!schemaData.classes[typeId]) return null;
 
     return (
-        <div className={`p-4 border-l-4 rounded-r-md ${level === 0 ? 'border-blue-500 bg-white' : 'border-gray-300 bg-gray-50 mt-2'}`}>
+        <div className={`p-4 border-l-4 rounded-r-md ${level === 0 ? 'border-emerald-500 bg-white' : 'border-gray-300 bg-gray-50 mt-2'}`}>
             <h3 className="font-bold text-lg text-gray-800 mb-4 flex items-center gap-2">
                 {typeId}
                 {level > 0 && <span className="text-xs font-normal text-gray-500 bg-gray-200 px-2 py-1 rounded">Nested</span>}
@@ -31,7 +32,7 @@ export const SchemaNode = ({ typeId, value = {}, onChange, level = 0 }) => {
                                 <input
                                     type="text"
                                     placeholder={`Enter ${propInfo.label}...`}
-                                    className="border border-gray-300 p-2 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                    className="border border-gray-300 p-2 rounded focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                                     value={currentValue || ''}
                                     onChange={(e) => onChange(propId, e.target.value)}
                                 />
@@ -56,19 +57,25 @@ export const SchemaNode = ({ typeId, value = {}, onChange, level = 0 }) => {
                                             />
                                         </div>
                                     ) : (
-                                        // If no value exists yet, show buttons to initialize the nested object
-                                        <div className="flex flex-wrap gap-2 mt-1">
-                                            {propInfo.ranges.map(rangeType => (
-                                                schemaData.classes[rangeType] && (
-                                                    <button
-                                                        key={rangeType}
-                                                        onClick={() => onChange(propId, { "@type": rangeType })}
-                                                        className="text-xs bg-gray-200 hover:bg-gray-300 text-gray-800 py-1 px-3 rounded transition"
-                                                    >
-                                                        + Add {rangeType}
-                                                    </button>
-                                                )
-                                            ))}
+                                        // 2. REPLACED THE BUTTONS WITH REACT-SELECT HERE
+                                        <div className="mt-2">
+                                            <Select
+                                                options={propInfo.ranges
+                                                    // Filter out ranges that aren't valid classes in our DB
+                                                    .filter(rangeType => schemaData.classes[rangeType])
+                                                    // Map the remaining valid classes to the format Select expects
+                                                    .map(rangeType => ({ value: rangeType, label: `+ Add ${rangeType}` }))
+                                                }
+                                                onChange={(selected) => onChange(propId, { "@type": selected.value })}
+                                                placeholder="Select nested type..."
+                                                isSearchable={true}
+                                                className="text-sm text-gray-900"
+
+                                                // PRO-TIP: These two lines prevent the dropdown menu from
+                                                // getting cut off if it's inside a scrolling container.
+                                                menuPortalTarget={document.body}
+                                                styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+                                            />
                                         </div>
                                     )}
                                 </div>
