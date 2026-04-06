@@ -1,32 +1,40 @@
 {
   "name": "json-ld-builder",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "prebuild": "node ./src/scripts/process-schema.js",
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "start": "node ./src/scripts/process-schema.js && vite"
+    "ng": "ng",
+    "start": "node ./src/scripts/process-schema.js && ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
   },
+  "private": true,
+  "packageManager": "npm@11.6.2",
   "dependencies": {
-    "@tailwindcss/vite": "^4.2.2",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "react-select": "^5.10.2",
-    "tailwindcss": "^4.2.2"
+    "@angular/common": "^21.2.0",
+    "@angular/compiler": "^21.2.0",
+    "@angular/core": "^21.2.0",
+    "@angular/forms": "^21.2.0",
+    "@angular/platform-browser": "^21.2.0",
+    "@angular/router": "^21.2.0",
+    "@ng-select/ng-select": "^21.8.0",
+    "@tailwindcss/postcss": "^4.2.2",
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.8",
+    "postcss-loader": "^8.2.1",
+    "rxjs": "~7.8.0",
+    "tailwindcss": "^4.2.2",
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.4",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.1",
-    "eslint": "^9.39.4",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
-    "globals": "^17.4.0",
-    "vite": "^8.0.1"
+    "@angular/build": "^21.2.6",
+    "@angular/cli": "^21.2.6",
+    "@angular/compiler-cli": "^21.2.0",
+    "jsdom": "^28.0.0",
+    "prettier": "^3.8.1",
+    "typescript": "~5.9.2",
+    "vitest": "^4.0.8"
   }
 }

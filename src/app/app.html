@@ -1,0 +1,48 @@
+<div class="min-h-screen bg-gray-100 p-8 font-sans text-gray-900 relative">
+  <header class="mb-8 text-center">
+    <h1 class="text-3xl font-extrabold text-emerald-800">JSON-LD Schema Builder</h1>
+    <p class="text-emerald-950">Dynamically generated from the official Schema.org vocabulary.</p>
+  </header>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+    <!-- LEFT COLUMN: FORM BUILDER -->
+    <section class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+      <div class="mb-6 pb-6 border-b border-gray-200">
+        <label class="block text-sm font-bold text-gray-700 mb-2">Select Root Schema Type:</label>
+        <ng-select [items]="schemaOptions" bindLabel="label" bindValue=""
+          [ngModel]="{ value: rootType, label: rootType }" (change)="handleRootTypeChange($event)" [searchable]="true"
+          placeholder="Type to search schemas..." class="text-base custom-ng-select"></ng-select>
+      </div>
+
+      <div class="overflow-y-auto max-h-[70vh] pr-2">
+        <app-schema-node [typeId]="rootType" [value]="formData"
+          (valueChange)="handleDataChange($event)"></app-schema-node>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: LIVE PREVIEW -->
+    <section class="sticky top-8 bg-emerald-100 rounded-xl shadow-xl overflow-hidden flex flex-col max-h-[85vh]">
+      <div class="bg-emerald-900 p-4 flex justify-between items-center border-b border-gray-700">
+        <h2 class="text-white font-mono text-sm">Output Preview</h2>
+        <button (click)="copyToClipboard()"
+          class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded text-sm font-bold transition flex items-center gap-2">
+          {{ showToast ? 'Copied!' : 'Copy JSON' }}
+        </button>
+      </div>
+      <pre class="p-6 text-emerald-950 font-mono text-sm overflow-auto">{{ formattedJson }}</pre>
+    </section>
+  </div>
+
+  <!-- Toast Notification -->
+  <div *ngIf="showToast"
+    class="fixed bottom-6 right-6 bg-gray-900 text-white px-6 py-3 rounded-lg shadow-2xl flex items-center gap-3 animate-fade-in-up z-50">
+    <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+    </svg>
+    <span class="font-medium text-sm">JSON copied to clipboard</span>
+  </div>
+
+  <footer>
+    <div class="text-center font-semibold py-4 mx-auto text-emerald-950 text-xl">© Sergii Ignatov, 2026</div>
+  </footer>
+</div>

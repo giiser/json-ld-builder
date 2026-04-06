@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 
 // 2. Set up paths
 const inputPath = path.join(__dirname, 'schemaorg-current-https.jsonld');
-const outputPath = path.join(__dirname, '../processed-schema.json');
+const outputPath = path.join(__dirname, '../assets/processed-schema.json');
 
 console.log('Parsing Schema.org JSON-LD...');
 const rawData = JSON.parse(fs.readFileSync(inputPath, 'utf8'));
