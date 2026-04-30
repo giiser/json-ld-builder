@@ -1,4 +1,4 @@
-<div class="p-4 border-l-4 rounded-r-md" [ngClass]="level === 0 ? 'border-emerald-500 bg-white' : 'border-gray-300 bg-gray-50 mt-2'">
+<div class="p-4 border-l-4 rounded-r-md" [ngClass]="level === 0 ? 'border-orange-500 bg-white' : 'border-gray-300 bg-gray-50 mt-2'">
     <h3 class="font-bold text-lg text-gray-800 mb-4 flex items-center gap-2">
         {{ typeId }}
         <span *ngIf="level > 0" class="text-xs font-normal text-gray-500 bg-gray-200 px-2 py-1 rounded">Nested</span>
@@ -13,7 +13,7 @@
                     <input
                         type="text"
                         [placeholder]="'Enter ' + propInfo.label + '...'"
-                        class="border border-gray-300 p-2 rounded focus:ring-2 focus:ring-emerald-500 focus:outline-none w-full"
+                        class="border border-gray-300 p-2 rounded focus:ring-2 focus:ring-orange-500 focus:outline-none w-full"
                         [ngModel]="value[propId] || ''"
                         (ngModelChange)="onFieldChange(propId, $event)"
                     />

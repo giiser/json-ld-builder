@@ -13,11 +13,12 @@
 
 /* Fix for ng-select styling inside tailwind */
 .custom-ng-select .ng-select-container {
-  border-radius: 0.375rem; 
-  border-color: #d1d5db; 
+  border-radius: 0.375rem;
+  border-color: #d1d5db;
   min-height: 42px;
 }
 .custom-ng-select.ng-select-focused .ng-select-container {
-  border-color: #10b981; 
-  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2); 
+  border-color: orange;
+  /*box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);*/
+  box-shadow: 0 0 0 2px orangered;
 }
